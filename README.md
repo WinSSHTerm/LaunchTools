@@ -1,12 +1,91 @@
 # Launch Tools
 
-The **Launch Tool** is a feature available for each connection in **WinSSHTerm** since version **2.39.0**. It integrates **PowerShell scripts** into WinSSHTerm, making it much more versatile.
+The **Launch Tool** is a feature available for each connection in **WinSSHTerm** since version **2.39.0**. It integrates **PowerShell scripts** into WinSSHTerm, making it much more versatile. To use the Launch Tool, the Windows installation on which you run WinSSHTerm must support **ConPTY** (supported since **Windows 10 version 1809**, released in October 2018).
 
 A **Launch Tool** is defined by an **XML document** that contains parameters, options, and a PowerShell script. You can use the XML documents provided in this repository or create your own.
+
+## Configure a Launch Tool in WinSSHTerm
 
 To configure the Launch Tool in the connection settings of WinSSHTerm, you can either:
 
 1. Set the path to the XML file via **Connection → Launch Tool**, or
 2. Encode the content of the XML file with **Base64** (as a single line) and save the encoded string into **Connections → L-Tool Base64**.
 
-To use the Launch Tool, the Windows installation on which you run WinSSHTerm must support **ConPTY** (supported since **Windows 10 version 1809**, released in October 2018).
+In case both parameters have a valid value, then **Connection → Launch Tool** will be prioritized.
+
+You can override the parameters of the Launch Tool by saving a single-line string with key-value pairs (JSON formatted) into **Connections → L-Tool Vars**.
+
+### Example
+
+A Launch Tool contains the following parameters:
+
+```xml
+<param>
+  <name>LT.MY_VAR_1</name>
+  <value>false</value>
+</param>
+<param>
+  <name>LT.MY_VAR_2</name>
+  <value>10</value>
+</param>
+```
+
+To override both parameters to `"true"` and `"20"`, you have to set the string like this:
+
+```json
+{"LT.MY_VAR_1":"true","LT.MY_VAR_2":"20"}
+```
+
+## Structure of the XML File
+
+### Parameters (Optional)
+
+Parameters allow you to dynamically change the behavior of the PowerShell script. WinSSHTerm will replace each placeholder in the PowerShell script with its value before executing the script. A placeholder contains the parameter name inside two brackets, e.g., `{{LT.MY_VAR_1}}`.
+
+In the `<params>` section, you can define multiple `<param>` tags. Each `<param>` tag must contain two sub-tags: `<name>` and `<value>`. Each parameter name must match the regular expression `^LT\.[A-Z0-9_]+$`.
+
+### Options (Mandatory)
+
+Options allow you to adjust the way WinSSHTerm handles the Launch Tool.
+
+In the `<options>` section, you can define multiple `<option>` tags. Each `<option>` tag must contain two sub-tags: `<name>` and `<value>`. Each parameter name must match the regular expression `^LTOPT\.[A-Z0-9_]+$`.
+
+The following options are available and must be set:
+
+- **`LTOPT.WINDOW_HIDE_TIME_IN_MILLIS`**: When WinSSHTerm starts a Launch Tool, a new window will be opened. Most of the time, the script will be finished in a short time, and the window will be closed again. To avoid this short popup of the window, you can set a delay time (e.g., `1000` for 1 second). A value of `0` will show the window immediately.
+  
+- **`LTOPT.KILL_PROCS_ON_WINDOW_CLOSE`**: If `true`, WinSSHTerm will automatically close all subprocesses opened in the script after the Launch Tool finishes. If `false`, these processes will continue to run. All subprocesses will be closed at last when WinSSHTerm is closed.
+
+- **`LTOPT.LAUNCH_TERMINAL`**: If `true`, WinSSHTerm will launch the terminal after the Launch Tool finishes. If `false`, WinSSHTerm will take no action after the Launch Tool closes.
+
+- **`LTOPT.LAUNCH_COPY_FILES`**: If `true`, WinSSHTerm will launch the copy files operation after the Launch Tool finishes, if the user chooses to do so. If `false`, WinSSHTerm will take no action after the Launch Tool closes, even if the user chose to copy files.
+
+### The PowerShell Script
+
+The script is inside the `<script>` tag. As it typically has multiple lines, the script has to be inside a `CDATA` section, e.g.:
+
+```xml
+<script><![CDATA[
+# script line 1
+# script line 2
+...
+]]></script>
+```
+
+#### Script Ending and Return Value
+
+To signal WinSSHTerm that the script has successfully finished, a special marker line needs to be set. When WinSSHTerm reads this marker, it will stop reading the script output and wait until it exits. The marker line is a string that starts with `"WinSSHTerm_script_finished"`. You can set the marker by placing this command at the end of the script:
+
+```powershell
+Write-Output "WinSSHTerm_script_finished"
+```
+
+Optionally, you can set a return value. WinSSHTerm reserves a special variable `{{LTRET.VALUE}}` for each opened connection. The return value of the script will be available in this special variable after the Launch Tool finishes. For example, if the script contains a PowerShell variable `$myPowerShellVar`, you can set the return value this way:
+
+```powershell
+Write-Output "WinSSHTerm_script_finished;{""VALUE"":""$myPowerShellVar""}"
+```
+
+## Known Limitations
+
+- Currently, Launch Tools do not work in Cluster Mode.
