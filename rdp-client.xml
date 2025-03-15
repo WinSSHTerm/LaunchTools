@@ -17,16 +17,16 @@ Parameters:
 ]]></description>
   <params>
     <param>
-	  <name>LT.HANDLE_CREDENTIALS_AUTOMATICALLY</name>
-	  <value>true</value>
+      <name>LT.HANDLE_CREDENTIALS_AUTOMATICALLY</name>
+      <value>true</value>
     </param>
-	<param>
-	  <name>LT.AUTO_DELETE_CREDENTIALS_AFTER_DELAY</name>
-	  <value>false</value>
+    <param>
+      <name>LT.AUTO_DELETE_CREDENTIALS_AFTER_DELAY</name>
+      <value>false</value>
     </param>
-	<param>
-	  <name>LT.AUTO_DELETE_CREDENTIALS_DELAY_TIME_SECS</name>
-	  <value>15</value>
+    <param>
+      <name>LT.AUTO_DELETE_CREDENTIALS_DELAY_TIME_SECS</name>
+      <value>15</value>
     </param>
   </params>
   <options>
@@ -34,17 +34,17 @@ Parameters:
       <name>LTOPT.WINDOW_HIDE_TIME_IN_MILLIS</name>
       <value>1000</value>
     </option>
-	<option>
-	  <name>LTOPT.KILL_PROCS_ON_WINDOW_CLOSE</name>
-	  <value>false</value>
+    <option>
+      <name>LTOPT.KILL_PROCS_ON_WINDOW_CLOSE</name>
+      <value>false</value>
     </option>
-	<option>
-	  <name>LTOPT.LAUNCH_TERMINAL</name>
-	  <value>false</value>
+    <option>
+      <name>LTOPT.LAUNCH_TERMINAL</name>
+      <value>false</value>
     </option>
-	<option>
-	  <name>LTOPT.LAUNCH_COPY_FILES</name>
-	  <value>false</value>
+    <option>
+      <name>LTOPT.LAUNCH_COPY_FILES</name>
+      <value>false</value>
     </option>
   </options>
   <script><![CDATA[
