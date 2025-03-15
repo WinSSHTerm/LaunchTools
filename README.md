@@ -90,14 +90,14 @@ Write-Output "WinSSHTerm_script_finished;{""VALUE"":""$myPowerShellVar""}"
 ```
 #### Template and special variables
 The following variables can be used in the PowerShell script:
-- **{{CON.NAME}}**: name of the connection
-- **{{CON.HOST}}**: hostname/ip
-- **{{CON.USER}}**: username
-- **{{CON.PASSWD}}**: password
-- **{{CON.PORT}}**: port
-- **{{CON.DESC}}**: description
-- **{{CON.CUSTOMID}}**: a custom id of your choice
-- **{{WST.TEMPPATH}}**: a temporary path inside your WinSSHTerm's directory, that contains the instance's PID
+- **`{{CON.NAME}}`**: name of the connection
+- **`{{CON.HOST}}`**: hostname/ip
+- **`{{CON.USER}}`**: username
+- **`{{CON.PASSWD}}`**: password
+- **`{{CON.PORT}}`**: port
+- **`{{CON.DESC}}`**: description
+- **`{{CON.CUSTOMID}}`**: a custom id of your choice
+- **`{{WST.TEMPPATH}}`**: a temporary path inside your WinSSHTerm's directory, that contains the instance's PID
 
 ## Currently known Limitations
 
