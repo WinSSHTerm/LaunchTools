@@ -37,6 +37,9 @@ To override both parameters to `"true"` and `"20"`, you have to set the string l
 ```
 
 ## Structure of the XML File
+### Metadata (Optional)
+
+You can define the tags `<name>`, `<version>` and `<description>`.
 
 ### Parameters (Optional)
 
@@ -85,7 +88,18 @@ Optionally, you can set a return value. WinSSHTerm reserves a special variable `
 ```powershell
 Write-Output "WinSSHTerm_script_finished;{""VALUE"":""$myPowerShellVar""}"
 ```
+#### Template and special variables
+The following variables can be used in the PowerShell script:
+- **{{CON.NAME}}**: name of the connection
+- **{{CON.HOST}}**: hostname/ip
+- **{{CON.USER}}**: username
+- **{{CON.PASSWD}}**: password
+- **{{CON.PORT}}**: port
+- **{{CON.DESC}}**: description
+- **{{CON.CUSTOMID}}**: a custom id of your choice
+- **{{WST.TEMPPATH}}**: a temporary path inside your WinSSHTerm's directory, that contains the instance's PID
 
-## Known Limitations
+## Currently known Limitations
 
-- Currently, Launch Tools do not work in Cluster Mode.
+- Launch Tools do not work in Cluster Mode.
+- You can run Launch Tools only in one instance of WinSSHTerm.
