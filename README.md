@@ -1,6 +1,6 @@
 # Launch Tools
 
-The **Launch Tool** is a feature available for each connection in **WinSSHTerm** since version **2.39.0**. It integrates **PowerShell scripts** into WinSSHTerm, making it much more versatile. To use the Launch Tool, the Windows installation on which you run WinSSHTerm must support **ConPTY** (supported since **Windows 10 version 1809**, released in October 2018).
+The **Launch Tool** is a feature available for each connection in **WinSSHTerm** since version **2.39.0**. It integrates **PowerShell scripts** into WinSSHTerm, making it much more versatile. To use the Launch Tool, the Windows installation on which you run WinSSHTerm must support **ConPTY** (supported since **Windows 10 version 1809**, released in October 2018). This documentation describes the feature implementation from the **latest version** of WinSSHTerm.
 
 A **Launch Tool** is defined by an **XML document** that contains parameters, options, and a PowerShell script. You can use the XML documents provided in this repository or create your own.
 
@@ -98,8 +98,13 @@ The following variables can be used in the PowerShell script:
 - **`{{CON.DESC}}`**: description
 - **`{{CON.CUSTOMID}}`**: a custom id of your choice
 - **`{{WST.TEMPPATH}}`**: a temporary path inside your WinSSHTerm's directory, that contains the instance's PID
+- **`{{WST.PUTTYPATH}}`**: the location for the **PuTTY** binary
+- **`{{WST.PLINKPATH}}`**: the location for the **Plink** binary
+- **`{{WST.PAGEANTPATH}}`**: the location for the **Pageant** binary
+- **`{{WST.PUTTYGENPATH}}`**: the location for the **PuTTYgen** binary
+- **`{{WST.WINSCPPATH}}`**: the location for the **WinSCP** binary
+- **`{{WST.VCXSRVPATH}}`**: the location for the **VcXsrv** binary
 
 ## Currently known Limitations
 
 - Launch Tools do not work in Cluster Mode.
-- You can run Launch Tools only in one instance of WinSSHTerm.
