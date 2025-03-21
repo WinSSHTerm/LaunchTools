@@ -28,12 +28,22 @@ A Launch Tool contains the following parameters:
   <name>LT.MY_VAR_2</name>
   <value>10</value>
 </param>
+<param>
+  <name>LT.MY_SECRET_VAR</name>
+  <value></value>
+</param>
 ```
 
-To override both parameters to `"true"` and `"20"`, you have to set the string like this:
+To override `LT.MY_VAR_1` with `"true"` and `LT.MY_VAR_2` with `"20"`, you have to set the string like this:
 
 ```json
 {"LT.MY_VAR_1":"true","LT.MY_VAR_2":"20"}
+```
+
+If you need to pass a secret value, you can set a hidden variable in `File->Preferences->Connections`, e.g. `{{MY_SECRET}}`, set the value there and set the string like this:
+
+```json
+{"LT.MY_VAR_1":"true","LT.MY_VAR_2":"20","LT.MY_SECRET_VAR":"{{MY_SECRET}}"}
 ```
 
 ## Structure of the XML File
@@ -83,12 +93,16 @@ To signal WinSSHTerm that the script has successfully finished, a special marker
 Write-Output "WinSSHTerm_script_finished"
 ```
 
-Optionally, you can set a return value. WinSSHTerm reserves a special variable `{{LTRET.VALUE}}` for each opened connection. The return value of the script will be available in this special variable after the Launch Tool finishes. For example, if the script contains a PowerShell variable `$myPowerShellVar`, you can set the return value this way:
+Optionally, you can set one or more return variables. These variables will be parsed and made available for use in WinSSHTerm with the syntax `{{LTRET.<RETURN_VAR_NAME>}}` after the Launch Tool finishes. For example, if the script contains the PowerShell variables `$myReturnVar1` and `$myReturnVar2`, you can return them like this:
 
 ```powershell
-Write-Output "WinSSHTerm_script_finished;{""VALUE"":""$myPowerShellVar""}"
+Write-Output "WinSSHTerm_script_finished;{""VAR1"":""$myReturnVar1"":""VAR2"":""$myReturnVar2""}"
 ```
-#### Template and special variables
+After the Launch Tool finishes, the values of the return variables will be accessible in WinSSHTerm as
+- `{{LTRET.VAR1}}` for `$myReturnVar1`
+- `{{LTRET.VAR2}}` for `$myReturnVar2`
+
+#### Connection, template and special variables
 The following variables can be used in the PowerShell script:
 - **`{{CON.NAME}}`**: name of the connection
 - **`{{CON.HOST}}`**: hostname/ip
@@ -104,6 +118,9 @@ The following variables can be used in the PowerShell script:
 - **`{{WST.PUTTYGENPATH}}`**: the location for the **PuTTYgen** binary
 - **`{{WST.WINSCPPATH}}`**: the location for the **WinSCP** binary
 - **`{{WST.VCXSRVPATH}}`**: the location for the **VcXsrv** binary
+- In addition you can use all your custom variables from `File->Preferences->Connections`
+
+#### 
 
 ## Currently known Limitations
 
