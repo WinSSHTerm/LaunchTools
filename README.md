@@ -1,8 +1,10 @@
 # Launch Tools
 
-The **Launch Tool** is a feature available for each connection in **WinSSHTerm** since version **2.39.0**. It integrates **PowerShell scripts** into WinSSHTerm, making it much more versatile. To use the Launch Tool, the Windows installation on which you run WinSSHTerm must support **ConPTY** (supported since **Windows 10 version 1809**, released in October 2018). This documentation describes the feature implementation from the **latest version** of WinSSHTerm.
+**Launch Tools** is a feature that allows you run a **PowerShell script** for each connection in **WinSSHTerm**. It will be triggered before the SSH session is opened (opening an SSH session is optional). Using variables, you can exchange data between the script and WinSSHTerm.
 
-A **Launch Tool** is defined by an **XML document** that contains parameters, options, and a PowerShell script. You can use the XML documents provided in this repository or create your own.
+A **Launch Tool** is defined by an **XML document** that contains parameters, options, and a PowerShell script. You can use the **Launch Tools** provided in this repository or create your own.
+
+The feature was introduced in version **2.39.0**. To use the Launch Tool, the Windows installation on which you run WinSSHTerm must support **ConPTY** (supported since **Windows 10 version 1809**, released in October 2018). This documentation describes the feature implementation from the **latest version** of WinSSHTerm.
 
 ## Configure a Launch Tool in WinSSHTerm
 
@@ -96,7 +98,7 @@ Write-Output "WinSSHTerm_script_finished"
 Optionally, you can set one or more return variables. These variables will be parsed and made available for use in WinSSHTerm with the syntax `{{LTRET.<RETURN_VAR_NAME>}}` after the Launch Tool finishes. For example, if the script contains the PowerShell variables `$myReturnVar1` and `$myReturnVar2`, you can return them like this:
 
 ```powershell
-Write-Output "WinSSHTerm_script_finished;{""VAR1"":""$myReturnVar1"":""VAR2"":""$myReturnVar2""}"
+Write-Output "WinSSHTerm_script_finished;{""VAR1"":""$myReturnVar1"",""VAR2"":""$myReturnVar2""}"
 ```
 After the Launch Tool finishes, the values of the return variables will be accessible in WinSSHTerm as
 - `{{LTRET.VAR1}}` for `$myReturnVar1`
