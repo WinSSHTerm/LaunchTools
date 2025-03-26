@@ -92,13 +92,13 @@ The script is inside the `<script>` tag. As it typically has multiple lines, the
 To signal WinSSHTerm that the script has successfully finished, a special marker line needs to be set. When WinSSHTerm reads this marker, it will stop reading the script output and wait until it exits. The marker line is a string that starts with `"WinSSHTerm_script_finished"`. You can set the marker by placing this command at the end of the script:
 
 ```powershell
-Write-Output "WinSSHTerm_script_finished"
+Write-Host "WinSSHTerm_script_finished"
 ```
 
 Optionally, you can set one or more return variables. These variables will be parsed and made available for use in WinSSHTerm with the syntax `{{LTRET.<RETURN_VAR_NAME>}}` after the Launch Tool finishes. For example, if the script contains the PowerShell variables `$myReturnVar1` and `$myReturnVar2`, you can return them like this:
 
 ```powershell
-Write-Output "WinSSHTerm_script_finished;{""VAR1"":""$myReturnVar1"",""VAR2"":""$myReturnVar2""}"
+Write-Host "WinSSHTerm_script_finished;{""VAR1"":""$myReturnVar1"",""VAR2"":""$myReturnVar2""}"
 ```
 After the Launch Tool finishes, the values of the return variables will be accessible in WinSSHTerm as
 - `{{LTRET.VAR1}}` for `$myReturnVar1`
