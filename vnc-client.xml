@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WinSSHTerm_Launch_Tool version="1">
   <name>VNC client</name>
-  <version>1.0</version>
+  <version>1.1</version>
   <description><![CDATA[
 This launch tool lets you easily start VNC sessions with TigerVNC (https://github.com/TigerVNC/tigervnc). Make sure that the viewer is available on your system. If you use the installer version of TigerVNC (tigervnc64-X.Y.Z.exe), then no changes should need to be made to the parameters of this launch tool. Alternatively, you can download the standalone Viewer (vncviewer64-X.Y.Z.exe).
 
@@ -87,6 +87,6 @@ if (${{LT.HANDLE_CREDENTIALS_AUTOMATICALLY}}) {
 }
 
 # The script finished successfully
-Write-Output "WinSSHTerm_script_finished"
+Write-Host "WinSSHTerm_script_finished"
 ]]></script>
 </WinSSHTerm_Launch_Tool>
