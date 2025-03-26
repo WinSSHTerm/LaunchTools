@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WinSSHTerm_Launch_Tool version="1">
   <name>RDP client</name>
-  <version>1.0</version>
+  <version>1.1</version>
   <description><![CDATA[
 This launch tool lets you easily start RDP sessions with mstsc.exe.
 
@@ -22,7 +22,7 @@ Parameters:
     </param>
     <param>
       <name>LT.AUTO_DELETE_CREDENTIALS_AFTER_DELAY</name>
-      <value>false</value>
+      <value>true</value>
     </param>
     <param>
       <name>LT.AUTO_DELETE_CREDENTIALS_DELAY_TIME_SECS</name>
@@ -53,11 +53,11 @@ $ErrorActionPreference = "Stop"
 
 if (${{LT.HANDLE_CREDENTIALS_AUTOMATICALLY}}) {
   # Save credentials with cmdkey
-  cmdkey /generic:TERMSRV/{{CON.HOST}} /user:"{{CON.USER}}" /pass:"{{CON.PASSWD}}" 
+  cmdkey /generic:TERMSRV/{{CON.HOST}} /user:"{{CON.USER}}" /pass:"{{CON.PASSWD}}"
 }
 
 # Launch the RDP session with mstsc
-Start-Process mstsc.exe -ArgumentList "/v:{{CON.HOST}}:{{CON.PORT}}"
+mstsc /v:"{{CON.HOST}}:{{CON.PORT}}"
 
 if (${{LT.HANDLE_CREDENTIALS_AUTOMATICALLY}} -and ${{LT.AUTO_DELETE_CREDENTIALS_AFTER_DELAY}}) {
   # Delete the saved credential after a short delay
@@ -69,6 +69,6 @@ if (${{LT.HANDLE_CREDENTIALS_AUTOMATICALLY}} -and ${{LT.AUTO_DELETE_CREDENTIALS_
 }
 
 # The script finished successfully
-Write-Output "WinSSHTerm_script_finished"
+Write-Host "WinSSHTerm_script_finished"
 ]]></script>
 </WinSSHTerm_Launch_Tool>
