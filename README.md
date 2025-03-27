@@ -1,6 +1,6 @@
 # Launch Tools
 
-**Launch Tools** is a feature that allows you run a **PowerShell script** for each connection in **WinSSHTerm**. It will be triggered before the SSH session is opened (opening an SSH session is optional). Using variables, you can exchange data between the script and WinSSHTerm.
+**Launch Tools** is a feature that allows you run a **PowerShell script** for each connection in **WinSSHTerm**. It will be triggered before the SSH session is opened (opening an SSH session is optional). Using variables, you can exchange data between the script and WinSSHTerm. Use cases are launching external tools like **RDP** or **VNC clients**, setting up a **bastion hosts** and more. Another use case is generating variables at runtime with **dynamic variables** (e.g. timestamps).
 
 A **Launch Tool** is defined by an **XML document** that contains parameters, options, and a PowerShell script. You can use the **Launch Tools** provided in this repository or create your own.
 
