@@ -71,7 +71,7 @@ The following options are available and must be set:
   
 - **`LTOPT.KILL_PROCS_ON_WINDOW_CLOSE`**: If `true`, WinSSHTerm will automatically close all subprocesses opened in the script after the Launch Tool finishes. If `false`, these processes will continue to run. All subprocesses will be closed at last when WinSSHTerm is closed.
 
-- **`LTOPT.LAUNCH_TERMINAL`**: If `true`, WinSSHTerm will launch the terminal after the Launch Tool finishes. If `false`, WinSSHTerm will take no action after the Launch Tool closes.
+- **`LTOPT.LAUNCH_TERMINAL`**: If `true`, WinSSHTerm will launch the terminal after the Launch Tool finishes. If `false`, WinSSHTerm will take no action after the Launch Tool closes. Must be true to run the Launch Tool in Cluster Mode / Script Runner.
 
 - **`LTOPT.LAUNCH_COPY_FILES`**: If `true`, WinSSHTerm will launch the copy files operation after the Launch Tool finishes, if the user chooses to do so. If `false`, WinSSHTerm will take no action after the Launch Tool closes, even if the user chose to copy files.
 
@@ -121,9 +121,3 @@ The following variables can be used in the PowerShell script:
 - **`{{WST.WINSCPPATH}}`**: the location for the **WinSCP** binary
 - **`{{WST.VCXSRVPATH}}`**: the location for the **VcXsrv** binary
 - In addition you can use all your custom variables from `File->Preferences->Connections`
-
-#### 
-
-## Currently known Limitations
-
-- Launch Tools do not work in Cluster Mode.
