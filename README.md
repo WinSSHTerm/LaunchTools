@@ -83,7 +83,7 @@ The following options are available:
 
 - **`LTOPT.LAUNCH_COPY_FILES`** `(default=true)`: If `true`, WinSSHTerm will launch the copy files operation after the Launch Tool finishes, if the user chooses to do so. If `false`, WinSSHTerm will take no action after the Launch Tool closes, even if the user chose to copy files.
 
-- **`LTOPT.LOAD_COMMON_FUNCTIONS`** `(default=false)`: If `true`, a set of internal PowerShell functions will be sourced in the current Launch Tool.
+- **`LTOPT.LOAD_COMMON_FUNCTIONS`** `(default=false)`: If `true`, a set of internal PowerShell functions will be sourced in the current Launch Tool (see [Common_Functions](https://github.com/WinSSHTerm/LaunchTools/blob/main/Common_Functions.md)).
 
 - **`LTOPT.DEBUG_MODE`** `(default=false)`: The debug mode will show the Launch Tool window immediately and prevent it from closing automatically. In this mode the content of connection variables, Launch Tool parameters and options are printed before running the script. In case the script has return values these will be printed after the script finishes.
 
