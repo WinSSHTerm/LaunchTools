@@ -1,21 +1,29 @@
 # Launch Tools
 
-**Launch Tools** is a feature that allows you run a **PowerShell script** for each connection in **WinSSHTerm**. It will be triggered before the SSH session is opened (opening an SSH session is optional). Using variables, you can exchange data between the script and WinSSHTerm. Use cases are launching external tools like **RDP** or **VNC clients**, setting up a **bastion hosts** and more. Another use case is generating variables at runtime with **dynamic variables** (e.g. timestamps).
+**Launch Tools** is a feature that allows you run a **PowerShell script** for each connection in **WinSSHTerm**. It will be triggered before the SSH session is opened (opening an SSH session is optional). Using variables, you can exchange data between the script and WinSSHTerm. Use cases are launching external tools like **RDP** or **VNC clients**, setting up a tunnel through **multiple Jump Servers** and more. Another use case is generating variables at runtime with **dynamic variables** (e.g. timestamps).
 
-A **Launch Tool** is defined by an **XML document** that contains parameters, options, and a PowerShell script. You can use the **Launch Tools** provided in this repository or create your own.
+A **Launch Tool** is defined by an **XML document** that contains parameters, options, and a PowerShell script. There are internal Launch Tools embedded into WinSSHTerm which can be configured by selecting an item in a drop-down list. You can also create your own Launch Tools.
 
 The feature was introduced in version **2.39.0**. To use the Launch Tool, the Windows installation on which you run WinSSHTerm must support **ConPTY** (supported since **Windows 10 version 1809**, released in October 2018). This documentation describes the feature implementation from the **latest version** of WinSSHTerm.
 
-## Configure a Launch Tool in WinSSHTerm
+## Configure an internal Launch Tool in WinSSHTerm
 
-To configure the Launch Tool in the connection settings of WinSSHTerm, you can either:
+Internal Launch Tools are integrated into WinSSHTerm and can be easily configured in **Connection → Launch Tool**:
 
-1. Set the path to the XML file via **Connection → Launch Tool**, or
+* [Multiple Jump](https://github.com/WinSSHTerm/LaunchTools/blob/main/Multiple_Jump.md)
+* [RDP client](https://github.com/WinSSHTerm/LaunchTools/blob/main/RDP_client.md)
+* [VNC client](https://github.com/WinSSHTerm/LaunchTools/blob/main/VNC_client.md)
+
+## Configure a custom Launch Tool in WinSSHTerm
+
+To configure a custom Launch Tool in the connection settings of WinSSHTerm, you can either:
+
+1. Set the path to the XML file via **Connection → L-Tool File**, or
 2. Encode the content of the XML file with **Base64** (as a single line) and save the encoded string into **Connections → L-Tool Base64**.
 
-In case both parameters have a valid value, then **Connection → Launch Tool** will be prioritized.
+In case both parameters have a valid value, then **Connection → L-Tool File** will be prioritized. In case the an internal Launch Tool was set, then **Connection → Launch Tool** will always be prioritized.
 
-You can override the parameters of the Launch Tool by saving a single-line string with key-value pairs (JSON formatted) into **Connections → L-Tool Vars**.
+You can override the parameters or options of the Launch Tool by saving a single-line string with key-value pairs (JSON formatted) into **Connections → L-Tool Params** or **Connections → L-Tool Options**.
 
 ### Example
 
@@ -51,7 +59,7 @@ If you need to pass a secret value, you can set a hidden variable in `File->Pref
 ## Structure of the XML File
 ### Metadata (Optional)
 
-You can define the tags `<name>`, `<version>` and `<description>`.
+You can define the tags `<name>`, `<version>`, `<description>` and `<description_url>`. In the info window of a Launch Tool, you can open `<description_url>` in your browser by clicking on the button **Open Description URL**.
 
 ### Parameters (Optional)
 
@@ -59,21 +67,25 @@ Parameters allow you to dynamically change the behavior of the PowerShell script
 
 In the `<params>` section, you can define multiple `<param>` tags. Each `<param>` tag must contain two sub-tags: `<name>` and `<value>`. Each parameter name must match the regular expression `^LT\.[A-Z0-9_]+$`.
 
-### Options (Mandatory)
+### Options (Optional)
 
 Options allow you to adjust the way WinSSHTerm handles the Launch Tool.
 
 In the `<options>` section, you can define multiple `<option>` tags. Each `<option>` tag must contain two sub-tags: `<name>` and `<value>`. Each parameter name must match the regular expression `^LTOPT\.[A-Z0-9_]+$`.
 
-The following options are available and must be set:
+The following options are available:
 
-- **`LTOPT.WINDOW_HIDE_TIME_IN_MILLIS`**: When WinSSHTerm starts a Launch Tool, a new window will be opened. Most of the time, the script will be finished in a short time, and the window will be closed again. To avoid this short popup of the window, you can set a delay time (e.g., `1000` for 1 second). A value of `0` will show the window immediately.
+- **`LTOPT.WINDOW_HIDE_TIME_IN_MILLIS`** `(default=3000)`: When WinSSHTerm starts a Launch Tool, a new window will be opened. Most of the time, the script will be finished in a short time, and the window will be closed again. To avoid this short popup of the window, you can set a delay time (e.g., `1000` for 1 second). A value of `0` will show the window immediately.
   
-- **`LTOPT.KILL_PROCS_ON_WINDOW_CLOSE`**: If `true`, WinSSHTerm will automatically close all subprocesses opened in the script after the Launch Tool finishes. If `false`, these processes will continue to run. All subprocesses will be closed at last when WinSSHTerm is closed.
+- **`LTOPT.KILL_PROCS_ON_WINDOW_CLOSE`** `(default=false)`: If `true`, WinSSHTerm will automatically close all subprocesses opened in the script after the Launch Tool finishes. If `false`, these processes will continue to run. All subprocesses will be closed at last when WinSSHTerm is closed.
 
-- **`LTOPT.LAUNCH_TERMINAL`**: If `true`, WinSSHTerm will launch the terminal after the Launch Tool finishes. If `false`, WinSSHTerm will take no action after the Launch Tool closes. Must be true to run the Launch Tool in Cluster Mode / Script Runner.
+- **`LTOPT.LAUNCH_TERMINAL`** `(default=true)`: If `true`, WinSSHTerm will launch the terminal after the Launch Tool finishes. If `false`, WinSSHTerm will take no action after the Launch Tool closes. Must be true to run the Launch Tool in Cluster Mode / Script Runner.
 
-- **`LTOPT.LAUNCH_COPY_FILES`**: If `true`, WinSSHTerm will launch the copy files operation after the Launch Tool finishes, if the user chooses to do so. If `false`, WinSSHTerm will take no action after the Launch Tool closes, even if the user chose to copy files.
+- **`LTOPT.LAUNCH_COPY_FILES`** `(default=true)`: If `true`, WinSSHTerm will launch the copy files operation after the Launch Tool finishes, if the user chooses to do so. If `false`, WinSSHTerm will take no action after the Launch Tool closes, even if the user chose to copy files.
+
+- **`LTOPT.LOAD_COMMON_FUNCTIONS`** `(default=false)`: If `true`, a set of internal PowerShell functions will be sourced in the current Launch Tool.
+
+- **`LTOPT.DEBUG_MODE`** `(default=false)`: The debug mode will show the Launch Tool window immediately and prevent it from closing automatically. In this mode the content of connection variables, Launch Tool parameters and options are printed before running the script. In case the script has return values these will be printed after the script finishes.
 
 ### The PowerShell Script
 
@@ -108,9 +120,12 @@ After the Launch Tool finishes, the values of the return variables will be acces
 The following variables can be used in the PowerShell script:
 - **`{{CON.NAME}}`**: name of the connection
 - **`{{CON.HOST}}`**: hostname/ip
+- **`{{CON.RHOST}}`**: the hostname/ip of `CON.LOGICALHOST` if set, otherwise the value of `CON.HOST`
 - **`{{CON.USER}}`**: username
 - **`{{CON.PASSWD}}`**: password
 - **`{{CON.PORT}}`**: port
+- **`{{CON.RPORT}}`**: the port of `CON.LOGICALHOST` if set, otherwise the value of `CON.PORT`
+- **`{{CON.LOGICALHOST}}`**: the logical host with default port `22`, syntax: `<Host/IP>[:<Port>]`
 - **`{{CON.DESC}}`**: description
 - **`{{CON.CUSTOMID}}`**: a custom id of your choice
 - **`{{WST.TEMPPATH}}`**: a temporary path inside your WinSSHTerm's directory, that contains the instance's PID
