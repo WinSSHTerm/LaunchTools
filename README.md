@@ -25,7 +25,7 @@ In case both parameters have a valid value, then **Connection → L-Tool File** 
 
 ### Hello World Example
 
-This Launch Tool will simply output "Hello World" and then finish. It will open in Debug Mode. You can use this as a base for your own Launch Tool. To run it, save the xml code to a file e.g. `hello_world.xml`, configure its path in the connection settings of WinSSHTerm (**Connection → L-Tool File**) and open the connection.
+This Launch Tool will output "Hello World" and provide the current date as a return value. It will open in Debug Mode to show the content of the different variables. You can use this as a base for your own Launch Tool. To run it, save the xml code to a file e.g. `hello_world.xml`, configure its path in the connection settings of WinSSHTerm (**Connection → L-Tool File**) and open the connection.
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -54,7 +54,8 @@ This Launch Tool will simply output "Hello World" and then finish. It will open 
   </options>
   <script><![CDATA[
 Write-Host "Hello {{LT.MY_VAR}}"
-Write-Host "WinSSHTerm_script_finished"
+$today = Get-Date
+Write-Host "WinSSHTerm_script_finished;{""CURRENT_DATE"":""$today""}"
 ]]></script>
 </WinSSHTerm_Launch_Tool>
 ```
