@@ -8,7 +8,7 @@ The feature was introduced in version **2.39.0**. To use the Launch Tool, the Wi
 
 ## Configure an internal Launch Tool in WinSSHTerm
 
-Internal Launch Tools are integrated into WinSSHTerm and can be easily configured in **Connection → Launch Tool**:
+These Launch Tools are integrated into WinSSHTerm and can be configured in the connection settings of WinSSHTerm (see **Connection → Launch Tool**):
 
 * [Multiple Jump](https://github.com/WinSSHTerm/LaunchTools/blob/main/Multiple_Jump.md)
 * [RDP client](https://github.com/WinSSHTerm/LaunchTools/blob/main/RDP_client.md)
@@ -16,45 +16,49 @@ Internal Launch Tools are integrated into WinSSHTerm and can be easily configure
 
 ## Configure a custom Launch Tool in WinSSHTerm
 
-To configure a custom Launch Tool in the connection settings of WinSSHTerm, you can either:
+To configure a custom Launch Tool in the connection settings, you can either:
 
 1. Set the path to the XML file via **Connection → L-Tool File**, or
 2. Encode the content of the XML file with **Base64** (as a single line) and save the encoded string into **Connections → L-Tool Base64**.
 
 In case both parameters have a valid value, then **Connection → L-Tool File** will be prioritized. In case the an internal Launch Tool was set, then **Connection → Launch Tool** will always be prioritized.
 
-You can override the parameters or options of the Launch Tool by saving a single-line string with key-value pairs (JSON formatted) into **Connections → L-Tool Params** or **Connections → L-Tool Options**.
+### Hello World Example
 
-### Example
+This Launch Tool will simply output "Hello World" and then finish. It will open in Debug Mode. You can use this as a base for your own Launch Tool. To run it, save the xml code to a file e.g. `hello_world.xml`, configure its path in the connection settings of WinSSHTerm (**Connection → L-Tool File**) and open the connection.
 
-A Launch Tool contains the following parameters:
-
-```xml
-<param>
-  <name>LT.MY_VAR_1</name>
-  <value>false</value>
-</param>
-<param>
-  <name>LT.MY_VAR_2</name>
-  <value>10</value>
-</param>
-<param>
-  <name>LT.MY_SECRET_VAR</name>
-  <value></value>
-</param>
+```
+<?xml version="1.0" encoding="utf-8"?>
+<WinSSHTerm_Launch_Tool version="1">
+  <name>Hello World</name>
+  <version>1.0</version>
+  <params>
+    <param>
+      <name>LT.MY_VAR</name>
+      <value>world</value>
+    </param>
+  </params>
+  <options>
+    <option>
+      <name>LTOPT.LAUNCH_TERMINAL</name>
+      <value>false</value>
+    </option>
+    <option>
+      <name>LTOPT.LAUNCH_COPY_FILES</name>
+      <value>false</value>
+    </option>
+    <option>
+      <name>LTOPT.DEBUG_MODE</name>
+      <value>true</value>
+    </option>
+  </options>
+  <script><![CDATA[
+Write-Host "Hello {{LT.MY_VAR}}"
+Write-Host "WinSSHTerm_script_finished"
+]]></script>
+</WinSSHTerm_Launch_Tool>
 ```
 
-To override `LT.MY_VAR_1` with `"true"` and `LT.MY_VAR_2` with `"20"`, you have to set the string like this:
-
-```json
-{"LT.MY_VAR_1":"true","LT.MY_VAR_2":"20"}
-```
-
-If you need to pass a secret value, you can set a hidden variable in `File->Preferences->Connections`, e.g. `{{MY_SECRET}}`, set the value there and set the string like this:
-
-```json
-{"LT.MY_VAR_1":"true","LT.MY_VAR_2":"20","LT.MY_SECRET_VAR":"{{MY_SECRET}}"}
-```
 
 ## Structure of the XML File
 ### Metadata (Optional)
@@ -136,3 +140,37 @@ The following variables can be used in the PowerShell script:
 - **`{{WST.WINSCPPATH}}`**: the location for the **WinSCP** binary
 - **`{{WST.VCXSRVPATH}}`**: the location for the **VcXsrv** binary
 - In addition you can use all your custom variables from `File->Preferences->Connections`
+
+## Overriding Parameters and Options
+
+You can override the parameters or options of the Launch Tool by saving a single-line string with key-value pairs (JSON formatted) into the connection setting **Connections → L-Tool Params** or **Connections → L-Tool Options**.
+
+### Example
+A Launch Tool contains the following parameters:
+
+```xml
+<param>
+  <name>LT.MY_VAR_1</name>
+  <value>false</value>
+</param>
+<param>
+  <name>LT.MY_VAR_2</name>
+  <value>10</value>
+</param>
+<param>
+  <name>LT.MY_SECRET_VAR</name>
+  <value></value>
+</param>
+```
+
+To override `LT.MY_VAR_1` with `"true"` and `LT.MY_VAR_2` with `"20"`, you have to set the string like this:
+
+```json
+{"LT.MY_VAR_1":"true","LT.MY_VAR_2":"20"}
+```
+
+If you need to pass a secret value, you can set a hidden variable in `File->Preferences->Connections`, e.g. `{{MY_SECRET}}`, set the value there and set the string like this:
+
+```json
+{"LT.MY_VAR_1":"true","LT.MY_VAR_2":"20","LT.MY_SECRET_VAR":"{{MY_SECRET}}"}
+```
