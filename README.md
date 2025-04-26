@@ -61,17 +61,17 @@ Write-Host "WinSSHTerm_script_finished"
 
 
 ## Structure of the XML File
-### Metadata (Optional)
+### Metadata (optional)
 
 You can define the tags `<name>`, `<version>`, `<description>` and `<description_url>`. In the info window of a Launch Tool, you can open `<description_url>` in your browser by clicking on the button **Open Description URL**.
 
-### Parameters (Optional)
+### Parameters (optional)
 
 Parameters allow you to dynamically change the behavior of the PowerShell script. WinSSHTerm will replace each placeholder in the PowerShell script with its value before executing the script. A placeholder contains the parameter name inside two brackets, e.g., `{{LT.MY_VAR_1}}`.
 
 In the `<params>` section, you can define multiple `<param>` tags. Each `<param>` tag must contain two sub-tags: `<name>` and `<value>`. Each parameter name must match the regular expression `^LT\.[A-Z0-9_]+$`.
 
-### Options (Optional)
+### Options (optional)
 
 Options allow you to adjust the way WinSSHTerm handles the Launch Tool.
 
