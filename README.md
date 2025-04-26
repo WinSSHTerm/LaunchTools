@@ -2,7 +2,7 @@
 
 **Launch Tools** is a feature that allows you run a **PowerShell script** for each connection in **WinSSHTerm**. It will be triggered before the SSH session is opened (opening an SSH session is optional). Using variables, you can exchange data between the script and WinSSHTerm. Use cases are launching external tools like **RDP** or **VNC clients**, setting up a tunnel through **multiple Jump Servers** and more. Another use case is generating variables at runtime with **dynamic variables** (e.g. timestamps).
 
-A **Launch Tool** is defined by an **XML document** that contains parameters, options, and a PowerShell script. There are internal Launch Tools embedded into WinSSHTerm which can be configured by selecting an item in a drop-down list. You can also create your own Launch Tools.
+A **Launch Tool** is defined by an **XML document** that contains parameters, options, and a PowerShell script. There are internal Launch Tools embedded into WinSSHTerm which can be configured by selecting an item in a drop-down list. You can also create your own Launch Tools. You can view content of a Launch Tool by clicking on the `Info` button in the Launch Tool window.
 
 The feature was introduced in version **2.39.0**. To use the Launch Tool, the Windows installation on which you run WinSSHTerm must support **ConPTY** (supported since **Windows 10 version 1809**, released in October 2018). This documentation describes the feature implementation from the **latest version** of WinSSHTerm.
 
