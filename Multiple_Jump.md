@@ -1,6 +1,10 @@
 # Launch Tool "Multiple Jump"
 This launch tool allows you to connect to a remote system through multiple jump servers (bastion hosts). Make sure `plink.exe` is installed in WinSSHTerm.
 
+The launch tool will open a minimized PowerShell window for each SSH jump. These windows define the tunnel. By default they will stay open until WinSSHTerm exits, so that the tunnel can be reused. If you encounter problems with the tunnel, you can close them and reconnect to create a new tunnel.
+
+It will be detected if a host key of a jump server is not cached. In this case, an interactive window will open up. If you then cache the host key by entering `y`, the launch tool will retry and continue to create the tunnel.
+
 ## Sample usage
 In this example, the user (`My PC`) wants to connect to the remote system 192.168.2.203 (`MyServer`) through 2 jump servers:
 
