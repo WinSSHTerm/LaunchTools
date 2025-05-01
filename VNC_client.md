@@ -1,5 +1,5 @@
 # Launch Tool "VNC client"
-This launch tool lets you start a VNC session with [TigerVNC](https://github.com/TigerVNC/tigervnc) ([Download](https://sourceforge.net/projects/tigervnc/files/stable)). Make sure that the viewer is available on your system. If you use the installer version of TigerVNC (tigervnc64-X.Y.Z.exe), then no changes should need to be made to the parameters of this launch tool. Alternatively, you can download the standalone Viewer (vncviewer64-X.Y.Z.exe). Tunneling the VNC session through multiple Jump Servers is supported.
+This launch tool lets you start a VNC session with [TigerVNC](https://github.com/TigerVNC/tigervnc) ([Download](https://sourceforge.net/projects/tigervnc/files/stable)). Make sure that the viewer is available on your system. If you use the installer version of TigerVNC (tigervnc64-X.Y.Z.exe), then no changes should need to be made to the parameters of this launch tool. Alternatively, you can download the standalone Viewer (vncviewer64-X.Y.Z.exe). If you rename the file to `vncviewer.exe` and place it into your `tools` directory, then the Launch Tool will use it by default. Tunneling the VNC session through multiple Jump Servers is supported.
 
 ## Connection configuration:
 * `HOST/IP`: the hostname to connect via VNC
