@@ -121,6 +121,18 @@ After the Launch Tool finishes, the values of the return variables will be acces
 - `{{LTRET.VAR1}}` for `$myReturnVar1`
 - `{{LTRET.VAR2}}` for `$myReturnVar2`
 
+#### Output Buffering
+
+It might happen that not all output is captured in the Launch Tool window. In that case, place this line at the end of the script to force PowerShell to send all buffered output:
+```
+[Console]::Out.Flush()
+```
+If you use `exit` in your script, then place this line directly before the `exit` statement, e.g.
+```
+[Console]::Out.Flush()
+exit 1
+```
+
 #### Connection, template and special variables
 The following variables can be used in the PowerShell script:
 - **`{{CON.NAME}}`**: name of the connection
