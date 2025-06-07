@@ -12,6 +12,7 @@ It makes use of `Plink's` (local) port forwarding feature. After creating up the
 - `-plinkPath`: path to plink.exe, you can set `{{WST.PLINKPATH}}` as value
 - `-conHost`: set `{{CON.HOST}}` as value
 - `-conPort`: set `{{CON.PORT}}` as value
+- `-conName` (optional): set `{{CON.NAME}}` as value
 
 ### Return value
 - the local tcp port of the tunnel (random, between 49152 and 65355)
