@@ -13,6 +13,7 @@ These Launch Tools are integrated into WinSSHTerm and can be configured in the c
 * [Multiple Jump](https://github.com/WinSSHTerm/LaunchTools/blob/main/Multiple_Jump.md)
 * [RDP client](https://github.com/WinSSHTerm/LaunchTools/blob/main/RDP_client.md)
 * [VNC client](https://github.com/WinSSHTerm/LaunchTools/blob/main/VNC_client.md)
+* [HTTP client](https://github.com/WinSSHTerm/LaunchTools/blob/main/HTTP_client.md)
 
 ## Configure a custom Launch Tool in WinSSHTerm
 
