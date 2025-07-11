@@ -11,4 +11,4 @@ This launch tool lets you start a VNC session with [TigerVNC](https://github.com
 * `LT.VNC_VIEWER_BINARY_ABSOLUTE_PATH [valid path to exe]` `(default=C:\Program Files\TigerVNC\vncviewer.exe)`: An absolute path to the viewer binary
 * `LT.VNC_VIEWER_BINARY_TOOLS [filename]` `(default=<empty>)`: The filename of the viewer binary (e.g. vncviewer64-1.15.0.exe)
 * `LT.HANDLE_CREDENTIALS_AUTOMATICALLY` `(default=true)`: If true, the script will temporarily save the VNC password into a environment variable `VNC_PASSWORD` and use it for authentication. If false, the user has to manually input the VNC password.
-* `LT.ENABLE_MULTIPLE_JUMP` `(default=false)`: Enables support for tunneling the RDP session, see function `WinSSHTerm-StartMultipleJump` in [Common_Functions](https://github.com/WinSSHTerm/LaunchTools/blob/main/Common_Functions.md)
+* `LT.ENABLE_MULTIPLE_JUMP` `(default=false)`: Enables support for tunneling the VNC session, see function `WinSSHTerm-StartMultipleJump` in [Common_Functions](https://github.com/WinSSHTerm/LaunchTools/blob/main/Common_Functions.md)
