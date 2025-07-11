@@ -17,3 +17,4 @@ When tunneling an `https` secured web service, the browser won't be able to veri
 * `LT.BROWSER` `(default=AUTO)`: If `AUTO`, the URL will be opened in your default browser. You can define another browser, e.g. "msedge", "chrome", "firefox", ...
 * `LT.BROWSER_ARGS` `(default=<empty>)`: Set a space-separated list of arguments for the browser. Works only if `LT.BROWSER` is not set to `AUTO`. Example: `"--new-window --incognito"` (and `LT.BROWSER="chrome"`) 
 * `LT.ENABLE_MULTIPLE_JUMP` `(default=false)`: Enables support for tunneling the Web service, see function `WinSSHTerm-StartMultipleJump` in [Common_Functions](https://github.com/WinSSHTerm/LaunchTools/blob/main/Common_Functions.md)
+* `LT.MULTIPLE_JUMP_REPLACE_HOST` (default=true): If true, the host of the URL in `Logical Host` will be replaced to `127.0.0.1`. Set this to false if you use a DNS proxy or change the `hosts` file.
