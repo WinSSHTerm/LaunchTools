@@ -52,6 +52,6 @@ For the passwords of the jump servers there have been created 2 hidden variables
 * `Logical Host`: set the values for the remote system `<Host/IP>:<Port>`
 
 ## Parameters:
-* `LT.JUMP_LIST`: A comma-separated list of data elements that describe all jump servers and the remote system. For each jump server a data element is required. A data element has the syntax: `@{JumpHost='<Host/IP'; JumpUser='<User>'; JumpPort='<Port>'; DestHost='<Host/IP>'; DestPort='<Port>'}`. The first data element has to describe the jump server that is directly reachable.
+* `LT.JUMP_LIST`: A comma-separated list of data elements that describe all jump servers and the remote system. For each jump server a data element is required. A data element has the syntax: `@{JumpHost='<Host/IP>'; JumpUser='<User>'; JumpPort='<Port>'; DestHost='<Host/IP>'; DestPort='<Port>'}`. The first data element has to describe the jump server that is directly reachable.
 * `LT.PASSWORD_LIST` (optional): A comma-separated list of passwords for each jump server in `LT.JUMP_LIST`. The syntax is `'<password1>'`. It is recommended to use keys and Pageant for authentication - that way there is no need to define `LT.PASSWORD_LIST`
-* `LT.PLINK_PATH` `(default={{WST.PLINKPATH}})`: the path to plink.exe
+* `LT.PLINK_PATH` (optional) `(default={{WST.PLINKPATH}})`: the path to plink.exe
