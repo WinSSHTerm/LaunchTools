@@ -11,7 +11,7 @@ When tunneling an `https` secured web service, the browser won't be able to veri
 ## Connection configuration (multiple jump mode) :
 * `HOST/IP`: Set the template variable `{{LTRET.FWD_HOST}}`
 * `PORT`: Set the template variable `{{LTRET.FWD_PORT}}`
-* `Logical Host`: Set the remote URL to open in the browser. The host and port will be automatically replaced so that the traffic will be routed through the tunnel.
+* `Logical Host`: Set the remote URL to open in the browser. The host and port will be automatically replaced so that the traffic will be routed through the tunnel. You may set a context (e.g. `http://mydomain.localhost/my/custom/context`).
 
 ## Parameters:
 * `LT.BROWSER` `(default=AUTO)`: If `AUTO`, the URL will be opened in your default browser. You can define another browser, e.g. "msedge", "chrome", "firefox", ...
