@@ -32,3 +32,6 @@ This function performs port knocking against a remote host by sending a sequence
 - `-checkDestHost` (optional): set `{{LT.KNOCK_CHECK_DEST_HOST}}` as value (defaults to `{{CON.HOST}}`)
 - `-checkDestTcpPort` (optional): set `{{LT.KNOCK_CHECK_DEST_TCP_PORT}}` as value. TCP port to verify after knocking. Set to 0 to skip verification (defaults to `{{CON.PORT}}`)
 - `-checkMaxRetries` (optional): set `{{LT.KNOCK_CHECK_MAX_RETRIES}}` as value. Number of times to retry the entire knocking sequence if the destination check fails (default: 3). Each retry includes re-sending the full knock sequence
+
+### Return value
+- returns `true` if the port knock was successful
