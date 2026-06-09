@@ -1,7 +1,7 @@
 # Launch Tool "Port Knock"
 This launch tool performs port knocking against a remote host before establishing a connection. Port knocking is a technique where a sequence of connection attempts to closed ports triggers a firewall rule to temporarily open a specific port.
 
-The tool supports UDP knocking, custom payloads for UDP datagrams, and an post-knock verification check to confirm the destination port was successfully opened.
+The tool supports UDP knocking, custom payloads for UDP datagrams, and a pre- / post-knock verification check to confirm the destination port is already / was successfully opened.
 
 ## Parameters:
 * `LT.KNOCK_PORT_SEQUENCE` `(default=<empty>)`: The sequence of ports to knock, in order. Supports UDP protocol only. Example: `3454, 3455, 3456`
@@ -12,8 +12,8 @@ The tool supports UDP knocking, custom payloads for UDP datagrams, and an post-k
   2. **Post-sequence delay**: Additional wait time after all knocks complete
   3. **Check timeout**: Maximum total time for the check loop to keep retrying the destination port verification. The timeout for the verification is 500ms.
 * `LT.KNOCK_PAYLOAD_B64` `(default=<empty>)` (optional): A Base64-encoded payload to send with UDP knock datagrams. If empty, a single zero byte is sent. Example: `SGVsbG8gV29ybGQ=` (Base64 for "Hello World")
-* `LT.KNOCK_CHECK_DEST_HOST` `(default={{CON.HOST}})` (optional): The host to check after the port knocking sequence completes. Used to verify the destination port was successfully opened by the knock.
-* `LT.KNOCK_CHECK_DEST_TCP_PORT` `(default={{CON.PORT}})` (optional): The TCP port to check after knocking. Set to `0` to skip the verification check entirely.
+* `LT.KNOCK_CHECK_DEST_HOST` `(default={{CON.HOST}})` (optional): The host to check after the port knocking sequence completes. Used to verify the destination port was successfully opened by the knock. Also used in the pre-check.
+* `LT.KNOCK_CHECK_DEST_TCP_PORT` `(default={{CON.PORT}})` (optional): The TCP port to check before and after knocking. Set to `0` to skip the verification check entirely.
 * `LT.KNOCK_CHECK_MAX_RETRIES` `(default=3)` (optional): Maximum number of port knock attempts in case the port verification fails.
 
 ## Options:
