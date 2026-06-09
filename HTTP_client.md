@@ -18,3 +18,4 @@ When tunneling an `https` secured web service, the browser won't be able to veri
 * `LT.BROWSER_ARGS` `(default=<empty>)`: Set a space-separated list of arguments for the browser. Works only if `LT.BROWSER` is not set to `AUTO`. Example: `"--new-window --incognito"` (and `LT.BROWSER="chrome"`) 
 * `LT.ENABLE_MULTIPLE_JUMP` `(default=false)`: Enables support for tunneling the Web service, see function `WinSSHTerm-StartMultipleJump` in [Common_Functions](https://github.com/WinSSHTerm/LaunchTools/blob/main/Common_Functions.md)
 * `LT.MULTIPLE_JUMP_REPLACE_HOST` (default=true): If true, the host of the URL in `Logical Host` will be replaced to `127.0.0.1`. Set this to false if you use a DNS proxy or change the `hosts` file.
+* `LT.ENABLE_PORT_KNOCK` `(default=false)`: Enables support for UDP port knocking, see function `WinSSHTerm-StartPortKnock` in [Common_Functions](https://github.com/WinSSHTerm/LaunchTools/blob/main/Common_Functions.md)
