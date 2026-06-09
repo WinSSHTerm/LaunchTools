@@ -14,6 +14,7 @@ These Launch Tools are integrated into WinSSHTerm and can be configured in the c
 * [RDP client](https://github.com/WinSSHTerm/LaunchTools/blob/main/RDP_client.md)
 * [VNC client](https://github.com/WinSSHTerm/LaunchTools/blob/main/VNC_client.md)
 * [HTTP client](https://github.com/WinSSHTerm/LaunchTools/blob/main/HTTP_client.md)
+* [Port Knock](https://github.com/WinSSHTerm/LaunchTools/blob/main/Port_Knock.md)
 
 ## Configure a custom Launch Tool in WinSSHTerm
 
