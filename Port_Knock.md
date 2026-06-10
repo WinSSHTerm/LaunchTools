@@ -15,6 +15,7 @@ The tool supports UDP knocking, custom payloads for UDP datagrams, and a pre- / 
 * `LT.KNOCK_CHECK_DEST_HOST` `(default={{CON.HOST}})` (optional): The host to check after the port knocking sequence completes. Used to verify the destination port was successfully opened by the knock. Also used in the pre-check.
 * `LT.KNOCK_CHECK_DEST_TCP_PORT` `(default={{CON.PORT}})` (optional): The TCP port to check before and after knocking. Set to `0` to skip the verification check entirely.
 * `LT.KNOCK_CHECK_MAX_RETRIES` `(default=3)` (optional): Maximum number of port knock attempts in case the port verification fails.
+* `LT.KNOCK_PRE_RUN_POWERSHELL_CODE_B64` `(default=<empty>)` (optional): Custom Powershell code (base64 encoded) to dynamically change the port knocking behaviour (more info available [here](https://github.com/WinSSHTerm/LaunchTools/blob/main/Common_Functions.md))
 
 ## Options:
 * `LTOPT.DEBUG_MODE` `(default=false)`: Enables verbose debug output showing timing details, parsed port sequences, and check attempt progress.
