@@ -148,6 +148,7 @@ The following variables can be used in the PowerShell script:
 - **`{{CON.DESC}}`**: description
 - **`{{CON.CUSTOMID}}`**: a custom id of your choice
 - **`{{WST.TEMPPATH}}`**: a temporary path inside your WinSSHTerm's directory, that contains the instance's PID
+- **`{{WST.TOOLSPATH}}`**: the path to WinSSHTerm's tools directory
 - **`{{WST.PUTTYPATH}}`**: the location for the **PuTTY** binary
 - **`{{WST.PLINKPATH}}`**: the location for the **Plink** binary
 - **`{{WST.PAGEANTPATH}}`**: the location for the **Pageant** binary
