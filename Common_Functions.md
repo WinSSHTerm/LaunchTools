@@ -28,10 +28,22 @@ This function performs port knocking against a remote host by sending a sequence
   1. Delay between each knock in milliseconds (default: 50)
   2. Additional delay after sequence completes before starting destination check (default: 250)
   3. Maximum total time in milliseconds to retry the destination check. The timeout for the verification check is 500ms. (default: 2000)
-- `-base64Payload` (optional): set `{{LT.KNOCK_PAYLOAD_B64}}` as value. Base64-encoded payload for UDP knocks. If empty, a single zero byte is sent
+- `-base64Payload` (optional): set `{{LT.KNOCK_PAYLOAD_B64}}` as value. A payload for UDP knocks (does not need to be base64 encoded). If empty, a single zero byte is sent
 - `-checkDestHost` (optional): set `{{LT.KNOCK_CHECK_DEST_HOST}}` as value (defaults to `{{CON.HOST}}`)
 - `-checkDestTcpPort` (optional): set `{{LT.KNOCK_CHECK_DEST_TCP_PORT}}` as value. TCP port to verify after knocking. Set to 0 to skip verification (defaults to `{{CON.PORT}}`)
 - `-checkMaxRetries` (optional): set `{{LT.KNOCK_CHECK_MAX_RETRIES}}` as value. Number of times to retry the entire knocking sequence if the destination check fails (default: 3). Each retry includes re-sending the full knock sequence
+
+You can use the parameter `LT.KNOCK_PRE_RUN_POWERSHELL_CODE_B64` to dynamically change the port knocking behaviour by overriding these PowerShell variables:
+- `$knockPortSequence` 
+- `$knockHost`
+- `$knockSourcePort`
+- `$knockDelayMilliseconds`
+- `$knockPayload`
+- `$knockCheckDestHost`
+- `$knockCheckDestTcpPort`
+- `$knockCheckMaxRetries`
+
+The parameter accepts multiline PowerShell code that will be executed before the WinSSHTerm-StartPortKnock function call. The base64-encoded code is decoded at runtime and injected into the script, allowing you to override any of the port knocking parameters dynamically. 
 
 ### Return value
 - returns `true` if the port knock was successful

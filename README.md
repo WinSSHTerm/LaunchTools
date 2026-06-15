@@ -76,7 +76,7 @@ In the `<params>` section, you can define multiple `<param>` tags. Each `<param>
 
 ### Options (optional)
 
-Options allow you to adjust the way WinSSHTerm handles the Launch Tool.
+Options allow you to adjust the way WinSSHTerm handles the Launch Tool. WinSSHTerm will replace each placeholder in the PowerShell script, e.g. `{{LTOPT.DEBUG_MODE}}`.
 
 In the `<options>` section, you can define multiple `<option>` tags. Each `<option>` tag must contain two sub-tags: `<name>` and `<value>`. Each parameter name must match the regular expression `^LTOPT\.[A-Z0-9_]+$`.
 
@@ -148,6 +148,7 @@ The following variables can be used in the PowerShell script:
 - **`{{CON.DESC}}`**: description
 - **`{{CON.CUSTOMID}}`**: a custom id of your choice
 - **`{{WST.TEMPPATH}}`**: a temporary path inside your WinSSHTerm's directory, that contains the instance's PID
+- **`{{WST.TOOLSPATH}}`**: the path to WinSSHTerm's tools directory
 - **`{{WST.PUTTYPATH}}`**: the location for the **PuTTY** binary
 - **`{{WST.PLINKPATH}}`**: the location for the **Plink** binary
 - **`{{WST.PAGEANTPATH}}`**: the location for the **Pageant** binary
