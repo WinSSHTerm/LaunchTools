@@ -25,6 +25,13 @@ To configure a custom Launch Tool in the connection settings, you can either:
 
 In case both parameters have a valid value, then **Connection → L-Tool File** will be prioritized. In case the an internal Launch Tool was set, then **Connection → Launch Tool** will always be prioritized.
 
+### Debugging tips
+While customizing your Launch Tool, it is recommended to turn on the debug mode. This can be done by setting the following value for **Connection → L-Tool Options**:
+
+`{"LTOPT.DEBUG_MODE":"true"}`
+
+This will make sure the Launch Tool window will stay open so you can see what is going on. In the Launch Tool window you can also analyze the PowerShell script under **Info → Show script**. 
+
 ### Hello World Example
 
 This Launch Tool will output "Hello World" and provide the current date as a return value. It will open in Debug Mode to show the content of the different variables. You can use this as a base for your own Launch Tool. To run it, save the xml code to a file e.g. `hello_world.xml`, configure its path in the connection settings of WinSSHTerm (**Connection → L-Tool File**) and open the connection.
