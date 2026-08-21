@@ -13,6 +13,7 @@ It makes use of `Plink's` (local) port forwarding feature. After creating up the
 - `-conHost`: set `{{CON.HOST}}` as value
 - `-conPort`: set `{{CON.PORT}}` as value
 - `-conName` (optional): set `{{CON.NAME}}` as value
+- `-pwshPath` (optional): path to powershell.exe/pwsh.exe, you can set `{{WST.PWSHPATH}}` as value
 
 ### Return value
 - the local tcp port of the tunnel (random, between 49152 and 65355)
