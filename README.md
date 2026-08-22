@@ -6,6 +6,9 @@ A **Launch Tool** is defined by an **XML document** that contains parameters, op
 
 The feature was introduced in version **2.39.0**. To use the Launch Tool, the Windows installation on which you run WinSSHTerm must support **ConPTY** (supported since **Windows 10 version 1809**, released in October 2018). This documentation describes the feature implementation from the **latest version** of WinSSHTerm.
 
+**Performance**: Launch Tools works with either built-in Windows PowerShell 5.1 (legacy) or with modern PowerShell 7, offering better performance. It is recommended to install the latest LTS version of [PowerShell 7](https://github.com/powershell/powershell/releases) (e.g. the `win-x64.msi` or `win-arm64.msi` package). Make sure the use of `pwsh.exe` is enabled under `File->Preferences->Misc->Launch Tools` and check the version under `Help->Info->Windows Info->PowerShell`. WinSSHTerm will use PowerShell 7 if you see its version number there, e.g. `PowerShell: 7.6.5 (x86, 64-bit)`.
+`
+
 ## Configure an internal Launch Tool in WinSSHTerm
 
 These Launch Tools are integrated into WinSSHTerm and can be configured in the connection settings of WinSSHTerm (see **Connection → Launch Tool**):
@@ -162,6 +165,7 @@ The following variables can be used in the PowerShell script:
 - **`{{WST.PUTTYGENPATH}}`**: the location for the **PuTTYgen** binary
 - **`{{WST.WINSCPPATH}}`**: the location for the **WinSCP** binary
 - **`{{WST.VCXSRVPATH}}`**: the location for the **VcXsrv** binary
+- **`{{WST.PWSHPATH}}`**: the location for the **PowerShell** binary
 - In addition you can use all your custom variables from `File->Preferences->Connections`
 
 ## Overriding Parameters and Options
